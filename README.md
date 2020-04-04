@@ -1,12 +1,13 @@
-# Machine-Learning-Vision-
+# Machine Learning Vision
 
+## Introduction:
 The detectScene function takes an "image" parameter of type CIImage and then detects the contents of said image by using a machine learning model especifically made for this, there is also a "displayString" method to let the user know the action is being performed: 
 
  ```swift
    func detectScene(image: CIImage) {
         displayString(string: "detecting scene...")
   ```
-
+## Step One:
 The first step is to load the chosen machine learning model by assigning it to the constant "model" through the Swift VNCoreMLModel class, there is also a "displayString" method that is user in case of an error:
         
        
@@ -17,7 +18,7 @@ The first step is to load the chosen machine learning model by assigning it to t
         }
   ```
 
- 
+## Step Two:
 The second step is to create an imagine analysis (Vision) request by assigning it to the constant "request" through the Swift class VNCoreMLRequest that takes the previously assigned "model" constant that contains the VGG16() model that will be used for this. To assist with the request, there is a completion handler to specify a method to receive results from the model after you run the request as well as a "displayString" method to alert the user if an error occurs. Lastly, if no errors occur, the “results” property will cointain VNClassificationObservation objects identified by the model:
         
         
@@ -29,7 +30,7 @@ The second step is to create an imagine analysis (Vision) request by assigning i
                     return
             }
   ```
-  
+## Step Three:  
 The third step or the second part of the second step is to update the label with our new-found results. We use DispatchQueue.main.async to acess the main thread as it's required to update any UI elements as well as stop the activity indicator (activityIndicator) since the completion handler will have started it by the time we get to running the code. There is also a "displayString" method that will iterate through each result and alert the user if a error is encountered:
 
 ```swift
@@ -41,7 +42,7 @@ The third step or the second part of the second step is to update the label with
             }
         }
    ```
- 
+## Step Four:
 The fourth and last step is to actually perform the request by starting the acitvity indicator (activityIndicator) and creating the handler. The image is then passed to the handler and the do-catch block will then attempt the array of requests ([request]) by using the "perform" property while handling any errors that might be thrown. If any errors occur, the activity indicator (activityIndicator) will be stopped and the UI will be updated. If successful, the request completion handler is called and detectScene is completed:
        
        
